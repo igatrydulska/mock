@@ -1,0 +1,15 @@
+
+let img;
+function preLoad() {
+
+}
+function setup() {
+  createCanvas(1000,1000);
+  img = loadImage('niebo.jpg');
+
+}
+
+function draw() {
+    background(220);
+    image(img, 0, 0, 1000,1000);
+}
