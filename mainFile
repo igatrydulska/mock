@@ -1,6 +1,20 @@
 let img;
 let img1;
 
+let weatherjson = false; 
+let weatherloaded = 0; 
+let count = 0; 
+let yr, spainDate; 
+let metersSee = 0.0; // Calculating visibility in meters
+
+//live temperatures in Barcelona
+let url = "https://api.open-meteo.com/v1/forecast?latitude=41.39&longitude=2.16&hourly=visibility"
+
+let words = [];
+words[0]= ['The death will be bright'];
+words[1]=['This is a photo that I took in the botanical gardens of Barcelona in 2017. The picture on the left corresponds to the live changes in the city - the brighter the picture, the higher the tempereature. The picture on the right acts in a similiar way, however, it shows the future, predicted temperatures - by 2080, the temperature in the Mediteaarean region will rise by... degrees Celsius (source). Do you want to see the future?'];
+
+
 function preLoad() {
 
 }
@@ -10,6 +24,8 @@ function setup() {
   background(0) //I want my background to be black to contrast blue
   img = loadImage('niebo.jpg');
   img1 = loadImage('niebo2.jpg');
+  //creating data source for the temperature
+  table = loadTable(url, 'csv', 'header')
 
 }
 
@@ -21,19 +37,55 @@ function preLoad () {
 }
 
 function draw() {
+
+  if(table.getRowCount() ==0) return;
+  let rows = table.getRowCount();
+
   push(); //inserting the picture
     background(220);
-    image(img, 0, 0, 500, 500);
+    //i think value needs to correspond to the data source?
+    let value = 1000
+    let m = map(value, 8400, 24140, 1, 5)
+    image(m, img, 0, 0, 500, 500);
   pop();  
+
+  push();
+    stroke(250);
+    strokeWeight(5);
+    line(500,0,500,500);
+  pop();
+
+  push();
 
   push(); //creating the button
     let button;
     button = createButton('yes');
-    button.position(480,500);
-    button.mousePressed(image(img1,500,0,500,500));
+    button.position(480,620);
+    button.mousePressed((image(img1,500,0,600,500)));
   pop();
 
 
+
+push();
+  stroke(0);
+  strokeWeight(2);
+  fill(255)
+  textSize(30);
+  textStyle(BOLDITALIC);
+  textAlign(CENTER, TOP);
+  text(words[0], 500, 50);
+pop();
+
+
+  push();
+    stroke(250);
+    strokeWeight(1);
+    fill(0)
+    rectMode(CENTER)
+    textSize(16);
+    textAlign(CENTER);
+    text(words[1], 500, 560, 850, 100);
+  pop();
 
 
   //push();
@@ -65,5 +117,6 @@ let y = step/2;
 //make the colour values correspond to the live table
 //create another half 
 //create a button which will show the future 
+
 
 
