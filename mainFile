@@ -1,30 +1,39 @@
 
-//setting the variables
+//setting the variables for weather
 let weatherjson = false;
+let day = 1;
+let month = 12;
+let year = 2022;
+let currentDate = 27-11-2022;
+let url;
+
+
+let img;
+let img1;
 
 img = loadImage('niebo.jpg');
-  img1 = loadImage('niebo2.jpg');
-  let img;
-  let img1;
+img1 = loadImage('niebo2.jpg');
+
+
 
 //ensuring that both the picture and the weather API run smoothly
-//function preLoad() {
-    //var date = new Date();
-    //let day = String(date.getDate()-5);
-    //let month = String(date.getMonth() + 1);
-    //let year = date.getFullYear();
-   //let currentDate = ${year}-${month}-${day};
-    //let newUrl = "https://archive-api.open-meteo.com/v1/era5?latitude=51.5002&longitude=-0.1262"
-    //newUrl += &start_date=${currentDate}&end_date=${currentDate}&daily=temperature_2m_max&timezone=auto
-    //let url = "https://archive-api.open-meteo.com/v1/era5?latitude=51.5002&longitude=-0.1262&start_date=2022-11-09&end_date=2022-11-09&daily=temperature_2m_max&timezone=auto";
-    //weatherjson = loadJSON(newUrl);
 
+function preload() { // Calling loadJSON() inside preload() guarantees to complete the operation before setup() and draw() are called.
+  var date = new Date();
+  let day = String(date.getDate()-5);
+  let month = String(date.getMonth() + 1);
+  let year = date.getFullYear();
+  let currentDate = `${year}-${month}-${day}`;
+  let newUrl = "https://archive-api.open-meteo.com/v1/era5?latitude=51.5002&longitude=-0.1262" //Barcelona's localisation is 41.3874° N, 2.1686° E
+  newUrl += `&start_date=${currentDate}&end_date=${currentDate}&daily=temperature_2m_max&timezone=auto`
+  weatherjson = loadJSON(newUrl);
+}
   
 
 
 function setup() {
-  createCanvas(displayHeight, displayWidth);
-  background(0) //I want my background to be black to contrast blue
+  createCanvas(1000, 1000);
+  background(10) //I want my background to be black to contrast blue
 
 }
 
@@ -32,19 +41,22 @@ function preLoad () {
   
 }
 
-function draw() {}
+function draw() {
 push();
- image(img,0,0,400,400)
-pop()
-  push(); //creating the button
-    let button;
-    button = createButton('yes');
+ image(img('niebo.jpg'),0,0,100,400)
+pop();
+//push(); //creating the button
+  //  let button;
+    //button = createButton('yes');
     //creating a function that will make the other picture appear
-    button.position(480,500);
-    if (button.mousePressed) {
-      image(img1,0,0,400,600) 
-    } 
-  pop();
+    //button.position(480,500);
+    //if (button.mousePressed) {
+     // image(img1,0,0,400,600) 
+    //} 
+//pop();
+
+  }
+
 
 
 
