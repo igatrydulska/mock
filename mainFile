@@ -81,11 +81,16 @@ function draw() {
     }
   }
   img1.updatePixels();
- img1.updatePixels();
 
-  image(img, 130, 200, 400, 400);
-  image(img1, 760, 200, 400, 400);
-    textSize(32);
-    fill(255,255,255);
-    text('hello', 100, 100);
+  //creating an array
+    image(img, 130, 200, 400, 400);
+    image(img1, 760, 200, 400, 400);
+
+    let words = [];
+
+    words[0] = ["The death will be bright"];
+    words[1]= ["This is a photo that I took in the botanical gardens of Barcelona in 2017. The picture on the left corresponds to the live changes in the city - the brighter the picture, the higher the tempereature. The picture on the right acts in a similiar way, however, it shows the future, predicted temperatures - by 2080, the temperature in the Mediterranean region will rise by 2-6 degrees Celsius"];
+
+    text((words[0]), 100, 100);
+    text((words[1],0,0))
 }
