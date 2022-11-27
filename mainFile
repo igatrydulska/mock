@@ -1,21 +1,25 @@
+
 //setting the variables
 let weatherjson = false;
 
-//ensuring that both the picture and the weather API run smoothly
-function preLoad() {
-    var date = new Date();
-    let day = String(date.getDate()-5);
-    let month = String(date.getMonth() + 1);
-    let year = date.getFullYear();
-    let currentDate = ${year}-${month}-${day};
-    let newUrl = "https://archive-api.open-meteo.com/v1/era5?latitude=51.5002&longitude=-0.1262"
-    newUrl += &start_date=${currentDate}&end_date=${currentDate}&daily=temperature_2m_max&timezone=auto
-    //let url = "https://archive-api.open-meteo.com/v1/era5?latitude=51.5002&longitude=-0.1262&start_date=2022-11-09&end_date=2022-11-09&daily=temperature_2m_max&timezone=auto";
-    weatherjson = loadJSON(newUrl);
-  }
-  
+img = loadImage('niebo.jpg');
+  img1 = loadImage('niebo2.jpg');
+  let img;
+  let img1;
 
-}
+//ensuring that both the picture and the weather API run smoothly
+//function preLoad() {
+    //var date = new Date();
+    //let day = String(date.getDate()-5);
+    //let month = String(date.getMonth() + 1);
+    //let year = date.getFullYear();
+   //let currentDate = ${year}-${month}-${day};
+    //let newUrl = "https://archive-api.open-meteo.com/v1/era5?latitude=51.5002&longitude=-0.1262"
+    //newUrl += &start_date=${currentDate}&end_date=${currentDate}&daily=temperature_2m_max&timezone=auto
+    //let url = "https://archive-api.open-meteo.com/v1/era5?latitude=51.5002&longitude=-0.1262&start_date=2022-11-09&end_date=2022-11-09&daily=temperature_2m_max&timezone=auto";
+    //weatherjson = loadJSON(newUrl);
+
+  
 
 
 function setup() {
@@ -25,10 +29,7 @@ function setup() {
 }
 
 function preLoad () {
-  img = loadImage('niebo.jpg');
-  img1 = loadImage('niebo2.jpg');
-  let img;
-  let img1;
+  
 }
 
 function draw() {}
@@ -44,6 +45,7 @@ pop()
       image(img1,0,0,400,600) 
     } 
   pop();
+
 
 
 
