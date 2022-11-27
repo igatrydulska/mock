@@ -81,9 +81,11 @@ function draw() {
     }
   }
   img1.updatePixels();
+ img1.updatePixels();
 
   image(img, 130, 200, 400, 400);
   image(img1, 760, 200, 400, 400);
+    textSize(32);
+    fill(255,255,255);
+    text('hello', 100, 100);
 }
-
-
