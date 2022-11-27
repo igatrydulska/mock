@@ -29,22 +29,58 @@ function preload() { // Calling loadJSON() inside preload() guarantees to comple
   weatherjson = loadJSON(newUrl);
 }
   
+//setting the variables for weather
+let weatherjson = false;
+let day = 1;
+let month = 12;
+let year = 2022;
+let currentDate = 27-11-2022;
+let url;
+
+
+let img;
+let img1;
+
+img = loadImage('niebo.jpg');
+img1 = loadImage('niebo2.jpg');
+
+
+
+//ensuring that both the picture and the weather API run smoothly; 
+//creating a source for the weather API data
+
+function preload() { // Calling loadJSON() inside preload() guarantees to complete the operation before setup() and draw() are called.
+  var date = new Date();
+  let day = String(date.getDate()-5);
+  let month = String(date.getMonth() + 1);
+  let year = date.getFullYear();
+  let currentDate = `${year}-${month}-${day}`;
+  let newUrl = "https://archive-api.open-meteo.com/v1/era5?latitude=51.5002&longitude=-0.1262" //Barcelona's localisation is 41.3874° N, 2.1686° E
+  newUrl += `&start_date=${currentDate}&end_date=${currentDate}&daily=temperature_2m_max&timezone=auto`
+  weatherjson = loadJSON(newUrl);
+}
+
+//creating default set-up
+  
 
 
 function setup() {
-  createCanvas(1000, 1000);
-  background(10) //I want my background to be black to contrast blue
-
+  createCanvas(displayWidth, displayHeight);
+  //background(10) //I think this is what was blocking pictures
+  setInterval(preload, 1000 * 60 * 60 * 24); //update the weather every day
+  img = loadImage('niebo.jpg');
+  img1 = loadImage('niebo2.jpg');
 }
 
-function preLoad () {
+
+////function preLoad () {
   
-}
+//}
 
-function draw() {
-push();
- image(img('niebo.jpg'),0,0,100,400)
-pop();
+//function draw() {
+//push();
+//image(img('niebo.jpg'),0,0,100,400)
+//pop();
 //push(); //creating the button
   //  let button;
     //button = createButton('yes');
@@ -55,7 +91,10 @@ pop();
     //} 
 //pop();
 
-  }
+ // }
+
+
+
 
 
 
