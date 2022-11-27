@@ -49,15 +49,20 @@ let temp2 = Number(temp);
 
 
 function draw() {
-  clear();
-  background(0);
+  background(10);
   if (weatherjson === false) return;
   let constant = 2;
   let temp = weatherjson.daily.temperature_2m_max;
-  let temp2 = Number(temp);
-  temp2 = int(random(temp2, temp2+7));
+  let temp2 = Number(temp); // this will be the variable on which the brightness of the picture of the left will depend on
+  temp2 = int(random(temp2+2, temp2+6)); // this will be the variable on which the brightness of the picture on the right will depend on;
+  // 2 and 6 because this is the prognosis for the air temperature rise in Barcelona is the interval 2 - 6;
+  for (let x = 0; x < img1.width; x++) {
+  for (let y = 0; y < img1.height; y++) {
+  }
+  img1.updatePixels();
 
 }
+
 function draw () {
 image(img, 130, 200, 400, 400);
 image(img1, 760, 200, 400, 400);
