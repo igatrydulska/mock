@@ -56,22 +56,34 @@ function draw() {
   let temp2 = Number(temp); // this will be the variable on which the brightness of the picture of the left will depend on
   temp2 = int(random(temp2+2, temp2+6)); // this will be the variable on which the brightness of the picture on the right will depend on;
   // 2 and 6 because this is the prognosis for the air temperature rise in Barcelona is the interval 2 - 6;
+  img1.loadPixels();
+  //creating the for loop, so that the change is constant
   for (let x = 0; x < img1.width; x++) {
-  for (let y = 0; y < img1.height; y++) {
+    for (let y = 0; y < img1.height; y++) {
+      // Calculate the 1D location from a 2D grid
+      let loc = (x + y * img1.width)*4;
+      //I wanted to use the brightness function initially, however I noticed that it is unpredicatble with objects;
+      //I decided to work on each RBG value separately
+      let r, g, b;
+      r = img1.pixels[loc];
+      g = img1.pixels[loc + 1];
+      b = img1.pixels[loc + 2];
+      r += Number(temp)*2.05;
+      g += Number(temp)*2.05;
+      b += Number(temp)*2.05;
+      //constraining RGB to make sure they are within the color range (0-255)
+      r = constrain(r, 0, 255);
+      g = constrain(g, 0, 255);
+      b = constrain(b, 0, 255);
+      let c = color(r, g, b);
+      img1.set(x,y,c);
+
+    }
   }
   img1.updatePixels();
 
+  image(img, 130, 200, 400, 400);
+  image(img1, 760, 200, 400, 400);
 }
-
-function draw () {
-image(img, 130, 200, 400, 400);
-image(img1, 760, 200, 400, 400);
-
-text("current temperature = " + temp + "°C", 300, 190);
-text("temperature in the future = " + temp2 + "°C", 960, 190);
-}
-
-
-
 
 
