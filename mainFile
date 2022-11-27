@@ -1,4 +1,3 @@
-
 //setting the variables for weather
 let weatherjson = false;
 let day = 1;
@@ -49,7 +48,7 @@ let temp2 = Number(temp);
 
 
 function draw() {
-  background(10);
+  background(80);
   if (weatherjson === false) return;
   let constant = 2;
   let temp = weatherjson.daily.temperature_2m_max;
@@ -61,16 +60,17 @@ function draw() {
   for (let x = 0; x < img1.width; x++) {
     for (let y = 0; y < img1.height; y++) {
       // Calculate the 1D location from a 2D grid
-      let loc = (x + y * img1.width)*4;
+      let loc = (x + y * img1.width)*4; //this has the function of an array, as it let's me to choose a specific picture
       //I wanted to use the brightness function initially, however I noticed that it is unpredicatble with objects;
       //I decided to work on each RBG value separately
       let r, g, b;
       r = img1.pixels[loc];
       g = img1.pixels[loc + 1];
       b = img1.pixels[loc + 2];
-      r += Number(temp)*2.05;
-      g += Number(temp)*2.05;
-      b += Number(temp)*2.05;
+      //there is a constant value that the numbers are magnified by, as the effect without it was almost impossible to see
+      r += Number(temp)*2;
+      g += Number(temp)*2;
+      b += Number(temp)*2;
       //constraining RGB to make sure they are within the color range (0-255)
       r = constrain(r, 0, 255);
       g = constrain(g, 0, 255);
@@ -82,15 +82,21 @@ function draw() {
   }
   img1.updatePixels();
 
-  //creating an array
+  function preload () {
+    img;
+    img1;
+
+  }
+
     image(img, 130, 200, 400, 400);
     image(img1, 760, 200, 400, 400);
+    
+    if(mouseIsPressed) 
+    {
+      text("the death will be bright", 100,100,100,100)
 
-    let words = [];
+    }
 
-    words[0] = ["The death will be bright"];
-    words[1]= ["This is a photo that I took in the botanical gardens of Barcelona in 2017. The picture on the left corresponds to the live changes in the city - the brighter the picture, the higher the tempereature. The picture on the right acts in a similiar way, however, it shows the future, predicted temperatures - by 2080, the temperature in the Mediterranean region will rise by 2-6 degrees Celsius"];
-
-    text((words[0]), 100, 100);
-    text((words[1],0,0))
 }
+
+  
