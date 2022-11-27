@@ -1,3 +1,4 @@
+
 //setting the variables for weather
 let weatherjson = false;
 let day = 1;
@@ -49,8 +50,20 @@ let temp2 = Number(temp);
 
 function draw() {
   clear();
-  background(128, 128, 128);
-  if (weatherjson === false) return; //making sure that it operates ON data (adapted from the tutor's online page);
+  background(0);
+  if (weatherjson === false) return;
+  let constant = 2;
+  let temp = weatherjson.daily.temperature_2m_max;
+  let temp2 = Number(temp);
+  temp2 = int(random(temp2, temp2+7));
+
+}
+function draw () {
+image(img, 130, 200, 400, 400);
+image(img1, 760, 200, 400, 400);
+
+text("current temperature = " + temp + "°C", 300, 190);
+text("temperature in the future = " + temp2 + "°C", 960, 190);
 }
 
 
